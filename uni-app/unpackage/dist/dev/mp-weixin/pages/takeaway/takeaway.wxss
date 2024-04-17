@@ -1,0 +1,27 @@
+
+.res{
+	height: 250rpx;
+	display: flex;
+	background-color: antiquewhite;
+	margin: 10rpx;
+	padding: 20rpx;
+}
+.res-img{
+	
+	height: 250rpx;
+	width: 250rpx;
+}
+.res-brief-info{
+	margin-left: 20rpx;
+}
+.name{
+	font-weight: bold;
+}
+.score{
+	font-weight: bold;
+	color: orange;
+}
+.detail{
+	font-size: 30rpx;
+	color: gray;
+}
