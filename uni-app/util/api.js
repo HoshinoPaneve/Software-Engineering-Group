@@ -10,14 +10,16 @@ export const myRequest = (options)=>{
 			success: (res) => {
 				if(res.data.status!==0){
 					uni.showToast({
-						title:'获取数据失败'
+						title:'获取数据失败',
+						icon:"error"
 					})
 				}
 				resolve(res)
 			},
 			fail: (err) => {
 				uni.showToast({
-					title:'请求接口失败'
+					title:'请求接口失败',
+					icon:"error"
 				})
 				reject(err)
 			}

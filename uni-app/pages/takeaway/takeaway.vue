@@ -1,16 +1,32 @@
 <template>
 	<view>
-		<uni-search-bar @confirm="search" @input="input" bgColor="rgba(255,255,255,1)" placeholder="搜索商家"/>
+		<view class="takeaway-nav">
+			<uni-search-bar @confirm="search" @input="input" bgColor="#ddd" placeholder="搜索商家" radius="50"/>
+		</view>
 		
+		
+		
+		<view class="sort-list">
+			<view class="sort sort-selected">
+				综合排序
+			</view>
+			<view class="sort">
+				评分排序
+			</view>
+			<view class="sort">
+				销量排序
+			</view>
+		</view>
 		<view class="res-list">
+			
 			<view class="res">
-				<image src="/static/logo.png" mode="heightFix" class="res-img"></image>
+				<image src="/static/logos/logo-KFC.png" mode="heightFix" class="res-img"></image>
 				<view class="res-brief-info">
 					<text class="name">肯德基（信息学部店）</text><br />
-					<text class="score">4.9分</text><br />
+					<text class="score">4.9分</text>
 					<text class="detail">月销：3000+</text><br />
-					<text class="detail">起送：20￥ 配送费:8￥</text><br />
-					<text class="detail">30分钟 1.4km</text>
+					<text class="detail">起送：20￥  配送费:8￥</text><br />
+					<text class="detail">30分钟  1.4km</text>
 				</view>
 				
 			</view>
@@ -56,17 +72,46 @@
 </script>
 
 <style>
-.res{
-	height: 250rpx;
+	
+.uni-searchbar{
+	margin: -10rpx 0;
+}	
+	
+.sort-list{
 	display: flex;
-	background-color: antiquewhite;
+	justify-content: space-around;
+	margin: 0 10rpx;
+	padding: 0;
+}
+.sort{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 34%;
+	height: 60rpx;
+	border-top-left-radius: 20rpx;
+	border-top-right-radius: 20rpx;
+	background-color: #eee;
+	font-size: 35rpx;
+}
+.sort-selected{
+	background-color: #393;
+	color: #ffc;
+}
+.res{
+	height: 200rpx;
+	display: flex;
+	border-radius: 20rpx;
+	background-color: #fff;
+	box-shadow: 0rpx 10rpx 10rpx #e5e5e5;
 	margin: 10rpx;
 	padding: 20rpx;
 }
 .res-img{
-	
-	height: 250rpx;
-	width: 250rpx;
+	height: 200rpx;
+	width: 200rpx;
+	border-radius: 10rpx;
 }
 .res-brief-info{
 	margin-left: 20rpx;
@@ -75,6 +120,7 @@
 	font-weight: bold;
 }
 .score{
+	margin-right: 20rpx;
 	font-weight: bold;
 	color: orange;
 }

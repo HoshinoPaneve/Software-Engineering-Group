@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<view class="index-container">
 		<uni-search-bar @confirm="search" @input="input" bgColor="rgba(255,255,255,1)" placeholder="搜索"/>
 		
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular class="swiper">
@@ -72,7 +72,7 @@
 <style lang="scss">
 	
 	
-	.container {
+	.index-container {
 		padding-top: 20rpx;
 		font-size: 14px;
 		line-height: 24px;
