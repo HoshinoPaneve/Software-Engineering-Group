@@ -1,28 +1,42 @@
 /* 水平间距 */
 /* 水平间距 */
 .container {
+  padding-top: 20rpx;
   font-size: 14px;
   line-height: 24px;
 }
-.innerbox {
-  width: 150rpx;
-  height: 200rpx;
-  border-radius: 5%;
-  background-color: bisque;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.swiper {
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  overflow: hidden;
+  height: 400rpx;
 }
 .outerbox {
+  font-size: 30rpx;
   background-color: white;
   display: flex;
   justify-content: space-evenly;
   margin-top: 10rpx;
   margin-left: 20rpx;
   margin-right: 20rpx;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 10rpx 10rpx #e5e5e5;
 }
-.swiper {
+.innerbox {
+  width: 150rpx;
+  height: 200rpx;
   border-radius: 5%;
-  overflow: hidden;
-  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  width: 50%;
+  height: 50%;
+}
+.recommand-text {
+  margin-top: 10rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
 }

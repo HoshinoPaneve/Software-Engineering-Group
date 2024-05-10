@@ -1,5 +1,7 @@
 <template>
 	<view>
+		<uni-search-bar @confirm="search" @input="input" bgColor="rgba(255,255,255,1)" placeholder="搜索商家"/>
+		
 		<view class="res-list">
 			<view class="res">
 				<image src="/static/logo.png" mode="heightFix" class="res-img"></image>
@@ -43,7 +45,12 @@
 			}
 		},
 		methods: {
-			
+			search(){
+				console.log('search');
+			},
+			input(){
+				console.log('input')
+			}
 		}
 	}
 </script>
