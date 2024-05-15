@@ -2,15 +2,53 @@
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
-    return {};
+    return {
+      business: [],
+      sortID: 0
+    };
   },
+  watch: {},
   methods: {
-    search() {
-      console.log("search");
+    async search(e) {
+      const res = await this.$myRequest({
+        url: "/business/search",
+        data: {
+          key: e.value
+        }
+      });
+      this.business = res.data;
+      console.log(res);
     },
     input() {
       console.log("input");
+    },
+    async getbusinessCombined() {
+      this.sortID = 0;
+      const res = await this.$myRequest({
+        url: "/business/all"
+      });
+      this.business = res.data;
+      console.log(res);
+    },
+    async getbusinessScore() {
+      this.sortID = 1;
+      const res = await this.$myRequest({
+        url: "/business/score"
+      });
+      this.business = res.data;
+      console.log(res);
+    },
+    async getbusinessSale() {
+      this.sortID = 2;
+      const res = await this.$myRequest({
+        url: "/business/sale"
+      });
+      console.log(res);
+      this.business = res.data;
     }
+  },
+  onLoad() {
+    this.getbusinessCombined();
   }
 };
 if (!Array) {
@@ -29,6 +67,23 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       bgColor: "#ddd",
       placeholder: "搜索商家",
       radius: "50"
+    }),
+    d: common_vendor.n($data.sortID == 0 ? "sort-selected" : "sort"),
+    e: common_vendor.o(($event) => $options.getbusinessCombined()),
+    f: common_vendor.n($data.sortID == 1 ? "sort-selected" : "sort"),
+    g: common_vendor.o(($event) => $options.getbusinessScore()),
+    h: common_vendor.n($data.sortID == 2 ? "sort-selected" : "sort"),
+    i: common_vendor.o(($event) => $options.getbusinessSale()),
+    j: common_vendor.f($data.business, (item, k0, i0) => {
+      return {
+        a: _ctx.$hostURL + item.image,
+        b: common_vendor.t(item.name),
+        c: common_vendor.t(item.score),
+        d: common_vendor.t(item.saleVolume),
+        e: common_vendor.t(item.beginExpense),
+        f: common_vendor.t(item.deliverExpense),
+        g: item.id
+      };
     })
   };
 }

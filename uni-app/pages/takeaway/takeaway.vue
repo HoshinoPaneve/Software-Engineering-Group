@@ -7,47 +7,29 @@
 		
 		
 		<view class="sort-list">
-			<view class="sort sort-selected">
+			<view :class="sortID==0?'sort-selected' :'sort'"  @click="getbusinessCombined()">
 				综合排序
 			</view>
-			<view class="sort">
+			<view :class="sortID==1?'sort-selected' :'sort'" @click="getbusinessScore()">
 				评分排序
 			</view>
-			<view class="sort">
+			<view :class="sortID==2?'sort-selected' :'sort'" @click="getbusinessSale()">
 				销量排序
 			</view>
 		</view>
 		<view class="res-list">
-			
-			<view class="res">
-				<image src="/static/logos/logo-KFC.png" mode="heightFix" class="res-img"></image>
+			<view class="res" v-for="item in business" :key="item.id">
+				<image :src="$hostURL+item.image" class="res-img"></image>
 				<view class="res-brief-info">
-					<text class="name">肯德基（信息学部店）</text><br />
-					<text class="score">4.9分</text>
-					<text class="detail">月销：3000+</text><br />
-					<text class="detail">起送：20￥  配送费:8￥</text><br />
+					<text class="name">{{item.name}}</text><br />
+					<text class="score">{{item.score}}分</text>
+					<text class="detail">月销：{{item.saleVolume}}</text><br />
+					<text class="detail">起送：{{item.beginExpense}}￥  配送费:{{item.deliverExpense}}￥</text><br />
 					<text class="detail">30分钟  1.4km</text>
 				</view>
-				
 			</view>
-			<view class="res">
-				<image src="/static/logo.png" mode="heightFix" class="res-img"></image>
-				<view class="res-brief-info">
-					<text class="name">商家2</text>
-					<text class="score"></text>
-					<text class="detail"></text>
-				</view>
-				
-			</view>
-			<view class="res">
-				<image src="/static/logo.png" mode="heightFix" class="res-img"></image>
-				<view class="res-brief-info">
-					<text class="name">商家3</text>
-					<text class="score"></text>
-					<text class="detail"></text>
-				</view>
-				
-			</view>
+			
+			
 		</view>
 		
 	</view>
@@ -57,16 +39,55 @@
 	export default {
 		data() {
 			return {
-				
+				business:[],
+				sortID:0
 			}
 		},
+		watch: {
+		},
 		methods: {
-			search(){
-				console.log('search');
+			async search(e){
+				const res=await this.$myRequest({
+					url:'/business/search',
+					data:{
+						key:e.value
+					}
+				})
+				this.business=res.data;
+				console.log(res)
 			},
 			input(){
 				console.log('input')
+			},
+			async getbusinessCombined(){
+				this.sortID=0;
+				const res=await this.$myRequest({
+					url:'/business/all'
+				})
+				this.business=res.data;
+				console.log(res)
+			},
+			async getbusinessScore(){
+				this.sortID=1;
+				const res=await this.$myRequest({
+					url:'/business/score'
+				})
+				this.business=res.data;
+				console.log(res)
+			},
+			async getbusinessSale(){
+				this.sortID=2;
+				const res=await this.$myRequest({
+					url:'/business/sale'
+				})
+				console.log(res)
+				this.business=res.data;
 			}
+		},
+		
+		
+		onLoad(){
+			this.getbusinessCombined();
 		}
 	}
 </script>
@@ -92,10 +113,19 @@
 	height: 60rpx;
 	border-top-left-radius: 20rpx;
 	border-top-right-radius: 20rpx;
-	background-color: #eee;
 	font-size: 35rpx;
+	background-color: #eee;
 }
 .sort-selected{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 34%;
+	height: 60rpx;
+	border-top-left-radius: 20rpx;
+	border-top-right-radius: 20rpx;
+	font-size: 35rpx;
 	background-color: #393;
 	color: #ffc;
 }

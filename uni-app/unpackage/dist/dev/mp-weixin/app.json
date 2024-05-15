@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/my/my",
     "pages/takeaway/takeaway",
-    "pages/community/community"
+    "pages/community/community",
+    "pages/business/business"
   ],
   "window": {
     "navigationBarTextStyle": "black",

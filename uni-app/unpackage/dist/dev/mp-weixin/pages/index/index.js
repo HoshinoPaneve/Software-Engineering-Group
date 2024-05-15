@@ -40,7 +40,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.o($options.input),
     c: common_vendor.p({
       bgColor: "rgba(255,255,255,1)",
-      placeholder: "搜索"
+      placeholder: "搜索",
+      radius: "50"
     })
   };
 }

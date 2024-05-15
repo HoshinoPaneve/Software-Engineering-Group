@@ -5,7 +5,8 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-App.mpType = 'app'
+
+App.mpType = 'app'	
 
 const app = new Vue({
     ...App
@@ -22,6 +23,7 @@ export function createApp() {
   const app = createSSRApp(App)
   
   app.config.globalProperties.$myRequest=myRequest
+  app.config.globalProperties.$hostURL='http://localhost:9090'
   
   return {
     app

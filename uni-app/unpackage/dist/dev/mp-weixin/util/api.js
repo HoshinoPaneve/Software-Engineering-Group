@@ -8,7 +8,7 @@ const myRequest = (options) => {
       method: options.method || "GET",
       data: options.data || {},
       success: (res) => {
-        if (res.data.status !== 0) {
+        if (res.statusCode !== 200) {
           common_vendor.index.showToast({
             title: "获取数据失败",
             icon: "error"

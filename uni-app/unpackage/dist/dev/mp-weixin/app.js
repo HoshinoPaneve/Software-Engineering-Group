@@ -7,6 +7,7 @@ if (!Math) {
   "./pages/my/my.js";
   "./pages/takeaway/takeaway.js";
   "./pages/community/community.js";
+  "./pages/business/business.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -24,6 +25,7 @@ const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:
 function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.config.globalProperties.$myRequest = util_api.myRequest;
+  app.config.globalProperties.$hostURL = "http://localhost:9090";
   return {
     app
   };
