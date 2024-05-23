@@ -27,6 +27,12 @@
         "text": "社区"
       },
       {
+        "pagePath": "pages/business/business",
+        "iconPath": "static/icons/community_light.png",
+        "selectedIconPath": "static/icons/community_fill_light.png",
+        "text": "测试"
+      },
+      {
         "pagePath": "pages/my/my",
         "iconPath": "static/icons/my_light.png",
         "selectedIconPath": "static/icons/my_fill_light.png",
