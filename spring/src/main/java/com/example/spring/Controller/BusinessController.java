@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/business")
 public class BusinessController {
-    @Autowired
+    @Resource
     private BusinessMapper businessMapper;
 
     @GetMapping("/all")
@@ -35,5 +36,10 @@ public class BusinessController {
         return businessMapper.search(key);
     }
 
+    @GetMapping("/selectById")
+    public Business selectById(int id){
+        System.out.println(id);
+        return businessMapper.selectById(id);
+    }
 
 }

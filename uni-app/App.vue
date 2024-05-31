@@ -30,4 +30,7 @@
 		color: #333;
 		padding: 10px;
 	}
+	.container{
+		width: 100%;
+	}
 </style>

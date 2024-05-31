@@ -30,6 +30,13 @@
 			"path" : "pages/business/business",
 			"style" : 
 			{
+				"navigationBarTitleText" : "商家页面"
+			}
+		},
+		{
+			"path" : "pages/orders/orders",
+			"style" : 
+			{
 				"navigationBarTitleText" : ""
 			}
 		}
@@ -59,10 +66,10 @@
 				"text": "社区"
 			},
 			{
-				"pagePath": "pages/business/business",
+				"pagePath": "pages/orders/orders",
 				"iconPath": "static/icons/community_light.png",
 				"selectedIconPath": "static/icons/community_fill_light.png",
-				"text": "测试"
+				"text": "订单"
 			},
 			{
 				"pagePath": "pages/my/my",

@@ -8,6 +8,7 @@ if (!Math) {
   "./pages/takeaway/takeaway.js";
   "./pages/community/community.js";
   "./pages/business/business.js";
+  "./pages/orders/orders.js";
 }
 const _sfc_main = {
   onLaunch: function() {

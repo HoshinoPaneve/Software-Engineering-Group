@@ -22,6 +22,13 @@ const _sfc_main = {
     input() {
       console.log("input");
     },
+    //点击商家，接收商家id跳转到商家菜单页面
+    turnToBus(busId) {
+      common_vendor.index.navigateTo({
+        url: "/pages/business/business?busId=" + busId
+      });
+    },
+    //综合排序商家
     async getbusinessCombined() {
       this.sortID = 0;
       const res = await this.$myRequest({
@@ -30,6 +37,7 @@ const _sfc_main = {
       this.business = res.data;
       console.log(res);
     },
+    //分数排序商家
     async getbusinessScore() {
       this.sortID = 1;
       const res = await this.$myRequest({
@@ -38,6 +46,7 @@ const _sfc_main = {
       this.business = res.data;
       console.log(res);
     },
+    //销量排序商家
     async getbusinessSale() {
       this.sortID = 2;
       const res = await this.$myRequest({
@@ -82,10 +91,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: common_vendor.t(item.saleVolume),
         e: common_vendor.t(item.beginExpense),
         f: common_vendor.t(item.deliverExpense),
-        g: item.id
+        g: item.id,
+        h: common_vendor.o(($event) => $options.turnToBus(item.id), item.id)
       };
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Product/Project/Software-Engineering-Group/uni-app/pages/takeaway/takeaway.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-24088b51"], ["__file", "D:/Product/Project/Software-Engineering-Group/uni-app/pages/takeaway/takeaway.vue"]]);
 wx.createPage(MiniProgramPage);

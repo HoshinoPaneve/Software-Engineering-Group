@@ -1,10 +1,8 @@
 <template>
-	<view>
+	<view class="takeaway-container">
 		<view class="takeaway-nav">
 			<uni-search-bar @confirm="search" @input="input" bgColor="#ddd" placeholder="搜索商家" radius="50"/>
 		</view>
-		
-		
 		
 		<view class="sort-list">
 			<view :class="sortID==0?'sort-selected' :'sort'"  @click="getbusinessCombined()">
@@ -18,7 +16,7 @@
 			</view>
 		</view>
 		<view class="res-list">
-			<view class="res" v-for="item in business" :key="item.id">
+			<view class="res" v-for="item in business" :key="item.id" @click="turnToBus(item.id)">
 				<image :src="$hostURL+item.image" class="res-img"></image>
 				<view class="res-brief-info">
 					<text class="name">{{item.name}}</text><br />
@@ -59,6 +57,13 @@
 			input(){
 				console.log('input')
 			},
+			//点击商家，接收商家id跳转到商家菜单页面
+			turnToBus(busId){
+				uni.navigateTo({
+					url: '/pages/business/business?busId='+busId,
+				});
+			},
+			//综合排序商家
 			async getbusinessCombined(){
 				this.sortID=0;
 				const res=await this.$myRequest({
@@ -67,6 +72,7 @@
 				this.business=res.data;
 				console.log(res)
 			},
+			//分数排序商家
 			async getbusinessScore(){
 				this.sortID=1;
 				const res=await this.$myRequest({
@@ -75,6 +81,7 @@
 				this.business=res.data;
 				console.log(res)
 			},
+			//销量排序商家
 			async getbusinessSale(){
 				this.sortID=2;
 				const res=await this.$myRequest({
@@ -84,15 +91,13 @@
 				this.business=res.data;
 			}
 		},
-		
-		
 		onLoad(){
 			this.getbusinessCombined();
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 	
 .uni-searchbar{
 	margin: -10rpx 0;

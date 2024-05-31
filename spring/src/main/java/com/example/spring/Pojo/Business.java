@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 public class Business {
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
     private int saleVolume;
     private float score;
@@ -17,11 +17,11 @@ public class Business {
     private int beginExpense;
     private int deliverExpense;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

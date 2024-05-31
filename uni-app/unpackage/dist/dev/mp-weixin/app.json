@@ -4,7 +4,8 @@
     "pages/my/my",
     "pages/takeaway/takeaway",
     "pages/community/community",
-    "pages/business/business"
+    "pages/business/business",
+    "pages/orders/orders"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -27,10 +28,10 @@
         "text": "社区"
       },
       {
-        "pagePath": "pages/business/business",
+        "pagePath": "pages/orders/orders",
         "iconPath": "static/icons/community_light.png",
         "selectedIconPath": "static/icons/community_fill_light.png",
-        "text": "测试"
+        "text": "订单"
       },
       {
         "pagePath": "pages/my/my",

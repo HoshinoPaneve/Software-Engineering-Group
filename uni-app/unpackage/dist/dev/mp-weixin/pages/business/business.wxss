@@ -1,0 +1,118 @@
+
+.banner{
+		width: 100%;
+		height: 150rpx;
+		background-color: aquamarine;
+}
+.main{
+		margin-top: -20rpx;
+		border-top-left-radius: 20rpx;
+		border-top-right-radius: 20rpx;
+		background-color: #fff;
+}
+.bus-info{
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+}
+.bus-detail{
+		width: 60%;
+}
+.bus-img{
+		width: 160rpx;
+		height: 160rpx;
+		border: 2rpx solid #aaa;
+		border-radius: 20rpx;
+}
+.name{
+		margin: 10rpx 0;
+		white-space: nowrap;
+		overflow: hidden;
+		font-size: 40rpx;
+		font-weight: bold;
+}
+.score{
+		color: orange;
+		display: inline-block;
+		margin-right: 30rpx;
+}
+.saleVolume{
+		display: inline-block;
+}
+.bus-tab{
+		width: 100;
+		display: flex;
+		justify-content: space-around;
+		border-bottom: 2px solid #eee;
+}
+.tab{
+		width: 30%;
+		padding: 30rpx;  
+		text-align: center;
+}
+.tab-active{
+		border-bottom: 4rpx solid #ffe400;
+}
+.order-menubar{
+		float: left;
+		height: 1000rpx;
+		width: 25%;
+		background: #eee;
+}
+.order-foodbar{
+		float: left;
+		height: 1000rpx;
+		width: 75%;
+}
+.menu{
+		padding: 40rpx 0;
+		text-align: center;
+		overflow: hidden;
+		border-bottom: 2rpx solid #ddd;
+}
+.menu-selected{
+		background-color: #fff;
+		border-left: 8rpx solid #ffe400;
+}
+.food-info{
+		display: flex;
+		height: 250rpx;
+		background-color: #fff;
+		border-radius: 30rpx;
+		border: 2rpx solid #ddd;
+		margin: 15rpx;
+}
+.food-info .food-img{
+		height: 100%;
+		margin-left: 30rpx;
+		max-width: 280rpx
+}
+.food-detail{
+		position: absolute;
+		right: 15%;
+		padding-top:20rpx;
+		text-align: right;
+		height: 250rpx;
+}
+.food-name{
+		float:right;
+		max-height: 100rpx;
+		overflow: hidden;
+		font-size: 26rpx;
+		width: 150rpx;
+}
+.food-price{
+		color: red;
+		font-size: 40rpx;
+}
+.addOrReduce{
+		position: absolute;
+		bottom: 60rpx;
+		right: -10rpx;
+}
+.addOrReduce > .iconfont {
+	  font-size: 40rpx;
+	  color: #ffe400;
+	  padding:15rpx;
+}
+	
