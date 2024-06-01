@@ -21,11 +21,11 @@
 					<view :class="tab=='order'?'tab tab-active' :'tab'" @click="tabChange('order')">
 					  点菜
 					</view>
-					<view :class="tab=='business'?'tab tab-active' :'tab'" @click="tabChange('business')">
+					<view :class="tab=='info'?'tab tab-active' :'tab'" @click="tabChange('info')">
 					  商家
 					</view>
 				</view>
-				<view class="order">
+				<view class="order" v-if="tab=='order'">
 					<scroll-view scroll-y="true" class="order-menubar">
 						<view v-for="(item,index) in menu" :key="item.id" :class="index==menuID?'menu menu-selected' :'menu'" @click="menuChange(index)">
 							{{item.type}}
@@ -48,6 +48,27 @@
 						</view>
 					</scroll-view>
 				</view>
+				<view class="info" v-if="tab=='info'">
+					<view class="info_top">
+					  <view class="info_title">
+					    商家信息
+					  </view>
+					  <view class="iconfont icon-map">{{business.address}}</view>
+					  <view class="iconfont icon-time2">配送时间：10:30-20:00</view>
+					  <view class="iconfont icon-car">商家提供配送服务</view>
+					  <view class="iconfont icon-money">¥{{business.beginExpense}}元起送｜配送费¥{{business.deliverExpense}}</view>
+					  <view class="iconfont">电话：{{business.tel}}</view>
+					</view>
+					<view class="info_top">
+					  <view class="info_title">
+					    店内活动
+					  </view>
+					  <view class="iconfont icon-zhekou">满22减17；满50减33（在线支付专享）</view>
+					  <view class="iconfont icon-zhekou">折扣商品2.6折起（在线支付专享)</view>
+					  <view class="iconfont icon-zhekou">部分商品第二份半价</view>
+					  
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -61,14 +82,14 @@
 				menuID:0,
 				business:{
 					id:1,
-					name:'香茵波克现烤汉堡asdadsadasda',
+					name:'香茵波克现烤汉堡（武大校内店）',
 					saleVolume:321,
 					score:4.9,
 					image:'/images/bus-img/bus-2.png',
 					address:'武汉市武昌区武汉大学东中区九栋一楼',
 					tel:'18164297568',
-					beginExpense:Number,
-					deliverExpense:Number
+					beginExpense:0,
+					deliverExpense:0
 				},
 				menu:[],
 				foods:[{
@@ -248,4 +269,26 @@
 	  padding:15rpx;
 	}
 	
+	.info_top {
+	  margin-top: 10rpx;
+	  background: white;
+	  padding: 20rpx 40rpx;
+	}
+	.info_title {
+	  font-weight: bold;
+	  border-bottom: 2rpx solid #ddd;
+	  padding-bottom: 20rpx;
+	}
+	.info_top>.iconfont {
+	  line-height: 60rpx;
+	  font-size: 28rpx;
+	  color: #666;
+	}
+	.info_top>.iconfont:before {
+	  margin-right: 20rpx;
+	  font-size: 40rpx;
+	}
+	.info_top>.icon-zhekou:before {  
+	  color: #f74d4d;
+	}
 </style>
