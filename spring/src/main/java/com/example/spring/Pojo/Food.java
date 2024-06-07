@@ -2,6 +2,9 @@ package com.example.spring.Pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.beans.Transient;
 
 public class Food {
     @TableId(type = IdType.AUTO)

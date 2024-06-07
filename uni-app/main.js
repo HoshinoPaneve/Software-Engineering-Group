@@ -22,6 +22,7 @@ import { myRequest } from './util/api.js'
 export function createApp() {
   const app = createSSRApp(App)
   
+  //全局变量
   app.config.globalProperties.$myRequest=myRequest
   app.config.globalProperties.$hostURL='http://localhost:9090'
   

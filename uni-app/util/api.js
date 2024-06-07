@@ -1,4 +1,6 @@
+//后端端口
 const BASE_url='http://localhost:9090'
+
 
 //封装链接请求方法
 export const myRequest = (options)=>{

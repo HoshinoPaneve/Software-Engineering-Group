@@ -52,6 +52,8 @@
 }
 .name.data-v-24088b51{
 	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .score.data-v-24088b51{
 	margin-right: 20rpx;

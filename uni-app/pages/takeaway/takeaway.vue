@@ -161,6 +161,8 @@
 }
 .name{
 	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .score{
 	margin-right: 20rpx;

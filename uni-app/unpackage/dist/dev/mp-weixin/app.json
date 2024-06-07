@@ -5,7 +5,8 @@
     "pages/takeaway/takeaway",
     "pages/community/community",
     "pages/business/business",
-    "pages/orders/orders"
+    "pages/orders/orders",
+    "pages/submitOrder/submitOrder"
   ],
   "window": {
     "navigationBarTextStyle": "black",

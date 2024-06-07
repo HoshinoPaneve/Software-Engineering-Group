@@ -3,7 +3,15 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      business: [],
+      business: [{
+        id: 1,
+        image: "",
+        name: "商家名",
+        score: 4.9,
+        saleVolume: 3005,
+        beginExpense: 20,
+        deliverExpense: 8
+      }],
       sortID: 0
     };
   },

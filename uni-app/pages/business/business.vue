@@ -39,14 +39,28 @@
 								<view class="food-name">{{item.name}}</view>
 								<view class="food-price">￥{{item.price}}</view>
 								<view class="addOrReduce">
-								  <text class="iconfont icon-reduce" data-id="{{index}}" bindtap="reduce"></text>
-								  <text> {{index}} </text>
-								  <text class="iconfont icon-add" data-id="{{index}}" bindtap="add"></text>
+								  <text class="iconfont icon-reduce" @click="reduce(index)"></text>
+								  <text> {{item.num}}</text>
+								  <text class="iconfont icon-add" @click="add(index)"></text>
 								</view>
 							</view>
 							
 						</view>
 					</scroll-view>
+					<view class="bottomTab">
+						<view class="curExpense">
+							￥{{curExpense}}
+						</view>
+						<view class="delExpense">
+							｜配送费：￥{{business.deliverExpense}}
+						</view>
+						<view class="confirm-enough"  v-if="this.expenseEnough" @click="toSubmitOrder()">
+							选好了
+						</view>
+						<view class="confirm" v-else>
+							￥{{business.beginExpense}}起送
+						</view>
+					</view>
 				</view>
 				<view class="info" v-if="tab=='info'">
 					<view class="info_top">
@@ -80,6 +94,8 @@
 			return {
 				tab:'order',
 				menuID:0,
+				curExpense:0,
+				expenseEnough:false,
 				business:{
 					id:1,
 					name:'香茵波克现烤汉堡（武大校内店）',
@@ -93,22 +109,63 @@
 				},
 				menu:[],
 				foods:[{
-					name:String,
-					price:Number,
-					image:String,
-					saleVolume:Number,
+					name:'吮指原味鸡',
+					price:11,
+					image:'/images/good-img/good-1-1.png',
+					saleVolume:300,
+					num:0
 				}],
 			}
 		},
-		watch: {
-		},
 		methods: {
+			//点击板块改变样式
 			tabChange(data){
 				this.tab=data;
 			},
 			menuChange(data){
 				this.menuID=data;
 			},
+			//点击菜品的加减号时，使对应菜品对象的num变化，并遍历菜品数组计算当前价格
+			add(index){
+				this.foods[index].num++;
+				this.countCurExpense()
+			},
+			reduce(index){
+				if(this.foods[index].num>0){
+					this.foods[index].num--;
+					this.countCurExpense()
+				}
+			},
+			countCurExpense(){
+				var sum=0;
+				for(var i=0;i<this.foods.length;i++){
+					sum+=this.foods[i].num*this.foods[i].price;
+				}
+				this.curExpense=sum;
+				if(this.curExpense>=this.business.beginExpense){
+					this.expenseEnough=true;
+				}else{
+					this.expenseEnough=false;
+				}
+			},
+			
+			//跳转提交订单页面，把商家信息，选择的菜品信息，和总价格传过去。
+			toSubmitOrder(){
+				var chosenFoods=[];
+				for(var i=0;i<this.foods.length;i++){
+					if(this.foods[i].num!=0){
+						chosenFoods.push(this.foods[i]);
+					}
+				}
+				var business=encodeURIComponent(JSON.stringify(this.business));
+				var foods=encodeURIComponent(JSON.stringify(chosenFoods));
+				uni.navigateTo({
+					url: '/pages/submitOrder/submitOrder?business='+business+'&foods='+foods+'&expense='+this.curExpense,
+					
+				});
+			},
+			
+			//网络请求，获得相关信息
 			async getBusInfo(busId){
 				const res=await this.$myRequest({
 					url:'/business/selectById',
@@ -127,7 +184,6 @@
 					}
 				})
 				this.menu=res.data;
-				console.log(res)
 			},
 			async getfood(busId){
 				const res=await this.$myRequest({
@@ -137,19 +193,28 @@
 					}
 				})
 				this.foods=res.data;
-				console.log(res)
+				for(var i=0;i<this.foods.length;i++){
+					this.foods[i].num=0;
+				}
+				console.log(res);
 			}
 		},
+		//接收外卖页传来的商家id，获取商家信息和菜单，渲染页面
 		onLoad: function(option){
+			uni.showLoading({
+				title: '加载中',
+				mask:true
+			});
 			this.getBusInfo(option.busId);
 			this.getMenu(option.busId);
 			this.getfood(option.busId);
+			uni.hideLoading()
 		}
 	}
 	
 </script>
 
-<style>
+<style scoped>
 	.banner{
 		width: 100%;
 		height: 150rpx;
@@ -207,13 +272,14 @@
 	
 	.order-menubar{
 		float: left;
-		height: 1000rpx;
+		height: 950rpx;
+		padding-bottom: 130rpx;
 		width: 25%;
 		background: #eee;
 	}
 	.order-foodbar{
 		float: left;
-		height: 1000rpx;
+		height: 1080rpx;
 		width: 75%;
 	}
 	.menu{
@@ -290,5 +356,52 @@
 	}
 	.info_top>.icon-zhekou:before {  
 	  color: #f74d4d;
+	}
+	
+	.bottomTab{
+		position: fixed;
+		bottom: 30rpx;
+		background: #222;
+		display: flex;
+		align-items: center;
+		width: 90%;
+		border-radius: 50rpx;
+		margin: 0 5%;
+		height: 100rpx;
+		
+	}
+	.bottomTab .curExpense{
+		color: #fff;
+		font-size: 40rpx;
+		text-align: right;
+		padding: 30rpx;
+		flex-grow: 0.2;
+	}
+	.bottomTab .delExpense{
+		color: #ccc;
+		font-size: 27rpx;
+	}
+	.bottomTab .confirm{
+		position:absolute;
+		right: -2rpx;
+		color: #ccc;
+		font-size: 35rpx;
+		
+		width: 200rpx;
+	}
+	.bottomTab .confirm-enough{
+		position:absolute;
+		right: -2rpx;
+		
+		color: #000;
+		height: 100rpx;
+		width: 200rpx;
+		border-top-right-radius: 50rpx;
+		border-bottom-right-radius: 50rpx;
+		font-size: 35rpx;
+		font-weight: bold;
+		text-align: center;
+		line-height: 100rpx;
+		background-color: #ffe400;
 	}
 </style>
