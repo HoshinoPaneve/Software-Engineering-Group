@@ -65,11 +65,12 @@
 		data() {
 			return {
 				haveLogined:false,
-				avatar:uni.getStorageSync('avatar'),
-				name: uni.getStorageSync('name')
+				avatar:uni.getStorageSync('avatar'),//头像
+				name: uni.getStorageSync('name')//用户名
 			}
 		},
 		methods: {
+			//从本地缓存获取用户信息，如果获取不到说明没有登录，切换到登陆页面
 			getUserInfo(){
 				const id=uni.getStorageSync('userId')
 				if(id!=''){
@@ -78,16 +79,21 @@
 				this.name=uni.getStorageSync('name')
 				this.avatar=uni.getStorageSync('avatar')
 			},
+			
+			//退出登录，清空缓存
 			logout() {
 				this.haveLogined=false;
 				uni.clearStorage()
 			},
+			
+			//传入url，跳转到对应的页面
 			goPage(url) {
 				uni.navigateTo({
 					url: url
 				})
 			}
 		},
+		
 		onShow() {
 			this.getUserInfo()
 		}

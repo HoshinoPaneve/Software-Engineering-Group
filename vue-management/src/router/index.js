@@ -4,9 +4,6 @@ import VueRouter from 'vue-router'
 import empView from '@/views/empView'
 import foodView from '@/views/foodView'
 import orderView from '@/views/orderView'
-import bookManage from '@/components/bookManage'
-import bookAdd from '@/components/bookAdd'
-import bookDelete from '@/components/bookDelete'
 
 Vue.use(VueRouter)
 
@@ -26,15 +23,7 @@ const routes = [
     name: 'orderView',
     component: orderView
   },
-  {
-    path: '/book',
-    name: 'bookManage',
-    component: bookManage,
-    children: [
-      {path: 'bookAdd', component: bookAdd},
-      {path: 'bookDelete', component: bookDelete}
-    ]
-  }
+  
 ]
 
 const router = new VueRouter({

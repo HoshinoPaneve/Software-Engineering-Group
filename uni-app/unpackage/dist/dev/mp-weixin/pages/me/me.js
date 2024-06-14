@@ -9,10 +9,13 @@ const _sfc_main = {
     return {
       haveLogined: false,
       avatar: common_vendor.index.getStorageSync("avatar"),
+      //头像
       name: common_vendor.index.getStorageSync("name")
+      //用户名
     };
   },
   methods: {
+    //从本地缓存获取用户信息，如果获取不到说明没有登录，切换到登陆页面
     getUserInfo() {
       const id = common_vendor.index.getStorageSync("userId");
       if (id != "") {
@@ -21,10 +24,12 @@ const _sfc_main = {
       this.name = common_vendor.index.getStorageSync("name");
       this.avatar = common_vendor.index.getStorageSync("avatar");
     },
+    //退出登录，清空缓存
     logout() {
       this.haveLogined = false;
       common_vendor.index.clearStorage();
     },
+    //传入url，跳转到对应的页面
     goPage(url) {
       common_vendor.index.navigateTo({
         url
