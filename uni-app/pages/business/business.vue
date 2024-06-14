@@ -109,6 +109,7 @@
 				},
 				menu:[],
 				foods:[{
+					id:1,
 					name:'吮指原味鸡',
 					price:11,
 					image:'/images/good-img/good-1-1.png',
@@ -126,14 +127,32 @@
 				this.menuID=data;
 			},
 			//点击菜品的加减号时，使对应菜品对象的num变化，并遍历菜品数组计算当前价格
-			add(index){
+			async add(index){
 				this.foods[index].num++;
-				this.countCurExpense()
+				this.countCurExpense();
+				const res=await this.$myRequest({
+					url:'/shopcar/add',
+					method:'POST',
+					data:{
+						userId:uni.getStorageSync('userId'),
+						foodId:this.foods[index].id,
+						number:this.foods[index].num
+					}
+				})
 			},
-			reduce(index){
+			async reduce(index){
 				if(this.foods[index].num>0){
 					this.foods[index].num--;
 					this.countCurExpense()
+					const res=await this.$myRequest({
+						url:'/shopcar/deleteAll',
+						method:'DELETE',
+						data:{
+							userId:uni.getStorageSync('userId'),
+							foodId:this.foods[index].id,
+							number:this.foods[index].num
+						}
+					})
 				}
 			},
 			countCurExpense(){
@@ -168,34 +187,33 @@
 			//网络请求，获得相关信息
 			async getBusInfo(busId){
 				const res=await this.$myRequest({
-					url:'/business/selectById',
-					data:{
-						id:busId
-					}
+					url:'/business/selectById/'+busId
 				})
-				this.business=res.data;
+				this.business=res.data.data;
 				console.log(res)
 			},
 			async getMenu(busId){
 				const res=await this.$myRequest({
-					url:'/menu/select',
+					url:'/menu/selectAll',
 					data:{
-						id:busId
+						businessID:busId
 					}
 				})
-				this.menu=res.data;
+				this.menu=res.data.data;
 			},
 			async getfood(busId){
+				//获得食物信息
 				const res=await this.$myRequest({
-					url:'/food/select',
+					url:'/food/selectAll',
 					data:{
-						id:busId
+						businessID:busId
 					}
 				})
-				this.foods=res.data;
+				this.foods=res.data.data;
 				for(var i=0;i<this.foods.length;i++){
 					this.foods[i].num=0;
 				}
+				
 				console.log(res);
 			}
 		},
@@ -208,6 +226,7 @@
 			this.getBusInfo(option.busId);
 			this.getMenu(option.busId);
 			this.getfood(option.busId);
+			
 			uni.hideLoading()
 		}
 	}

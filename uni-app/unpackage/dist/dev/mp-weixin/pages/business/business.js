@@ -20,6 +20,7 @@ const _sfc_main = {
       },
       menu: [],
       foods: [{
+        id: 1,
         name: "吮指原味鸡",
         price: 11,
         image: "/images/good-img/good-1-1.png",
@@ -37,14 +38,32 @@ const _sfc_main = {
       this.menuID = data;
     },
     //点击菜品的加减号时，使对应菜品对象的num变化，并遍历菜品数组计算当前价格
-    add(index) {
+    async add(index) {
       this.foods[index].num++;
       this.countCurExpense();
+      await this.$myRequest({
+        url: "/shopcar/add",
+        method: "POST",
+        data: {
+          userId: common_vendor.index.getStorageSync("userId"),
+          foodId: this.foods[index].id,
+          number: this.foods[index].num
+        }
+      });
     },
-    reduce(index) {
+    async reduce(index) {
       if (this.foods[index].num > 0) {
         this.foods[index].num--;
         this.countCurExpense();
+        await this.$myRequest({
+          url: "/shopcar/deleteAll",
+          method: "DELETE",
+          data: {
+            userId: common_vendor.index.getStorageSync("userId"),
+            foodId: this.foods[index].id,
+            number: this.foods[index].num
+          }
+        });
       }
     },
     countCurExpense() {
@@ -76,31 +95,28 @@ const _sfc_main = {
     //网络请求，获得相关信息
     async getBusInfo(busId) {
       const res = await this.$myRequest({
-        url: "/business/selectById",
-        data: {
-          id: busId
-        }
+        url: "/business/selectById/" + busId
       });
-      this.business = res.data;
+      this.business = res.data.data;
       console.log(res);
     },
     async getMenu(busId) {
       const res = await this.$myRequest({
-        url: "/menu/select",
+        url: "/menu/selectAll",
         data: {
-          id: busId
+          businessID: busId
         }
       });
-      this.menu = res.data;
+      this.menu = res.data.data;
     },
     async getfood(busId) {
       const res = await this.$myRequest({
-        url: "/food/select",
+        url: "/food/selectAll",
         data: {
-          id: busId
+          businessID: busId
         }
       });
-      this.foods = res.data;
+      this.foods = res.data.data;
       for (var i = 0; i < this.foods.length; i++) {
         this.foods[i].num = 0;
       }

@@ -2,9 +2,9 @@
 	<view>
 		<view class="orderBlock">
 		  <view class="head">
-		    <view class="address" @click="toMyAddress()">
+		    <view class="address" @click="toAddress()">
 		      <view class="map">
-		        <view class="iconfont icon-map2">启梦创业广场 1A158-159</view>
+		        <view class="iconfont icon-map2">{{address}}</view>
 		        <view class="name">
 		          <text>李四先生</text>
 		          <text class="phone">18316588222</text>
@@ -78,7 +78,7 @@
 		<view class="other">
 		  <view>
 		    <text>订单备注</text>
-		    <textarea placeholder="请输入您的要求" />
+		    <textarea placeholder="请输入您的要求" v-model="notes"/>
 		  </view>
 		</view>
 		
@@ -99,6 +99,8 @@
 			return {
 				packExpense:1,
 				expense:11,
+				address:'启梦创业广场 1A158-159',
+				notes:'',
 				business:{
 					id:1,
 					name:'香茵波克现烤汉堡（武大校内店）',
@@ -111,6 +113,7 @@
 					deliverExpense:0
 				},
 				foods:[{
+					id:1,
 					name:'吮指原味鸡',
 					price:11,
 					image:'/images/good-img/good-1-1.png',
@@ -120,7 +123,37 @@
 			}
 		},
 		methods: {
-			
+			async submitOrder(){
+				const res=await this.$myRequest({
+					url:'/orders/addOrder',
+					method:'POST',
+					data:{
+						userId:uni.getStorageSync('userId'),
+						businessId:this.business.id,
+						address:this.address,
+						notes:this.notes,
+						price:this.expense
+					}
+				}).then(res=>{
+					uni.switchTab({
+						url:'/pages/orders/orders'
+					})
+					uni.showToast({
+						title:'提交订单成功',
+						icon:'success'
+					})
+				}).catch(err=>{
+					uni.showToast({
+						title:'提交订单失败',
+						icon:'error'
+					})
+				})
+			},
+			toAddress(){
+				uni.navigateTo({
+					url:"/pages/address/address"
+				})
+			}
 		},
 		
 		//接收商家页传过来的商家信息和商品信息，计算金额

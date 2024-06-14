@@ -4,12 +4,16 @@ const common_vendor = require("./common/vendor.js");
 const util_api = require("./util/api.js");
 if (!Math) {
   "./pages/index/index.js";
-  "./pages/my/my.js";
   "./pages/takeaway/takeaway.js";
-  "./pages/community/community.js";
   "./pages/business/business.js";
   "./pages/orders/orders.js";
   "./pages/submitOrder/submitOrder.js";
+  "./pages/address/address.js";
+  "./pages/addAddress/addAddress.js";
+  "./pages/register/register.js";
+  "./pages/me/me.js";
+  "./pages/wallet/wallet.js";
+  "./pages/charge/charge.js";
 }
 const _sfc_main = {
   onLaunch: function() {

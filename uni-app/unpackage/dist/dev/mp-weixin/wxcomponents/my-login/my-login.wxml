@@ -1,0 +1,1 @@
+<view class="container"><view class="login-box"><input class="input" type="text" placeholder="请输入账号" value="{{a}}" bindinput="{{b}}"/><input class="input" type="password" placeholder="请输入密码" value="{{c}}" bindinput="{{d}}"/><button class="btn" bindtap="{{e}}">登录</button><button class="register_btn" bindtap="{{f}}">没有账号?去注册 </button></view></view>
