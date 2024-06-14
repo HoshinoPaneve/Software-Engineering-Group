@@ -28,7 +28,7 @@ const _sfc_main = {
       }).then((res) => {
         if (res.data.code == 200) {
           common_vendor.index.switchTab({
-            url: "/pages/my/my"
+            url: "/pages/me/me"
           });
           common_vendor.index.showToast({
             title: "注册成功",

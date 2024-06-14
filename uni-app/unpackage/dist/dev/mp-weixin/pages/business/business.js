@@ -4,7 +4,7 @@ const _sfc_main = {
   data() {
     return {
       tab: "order",
-      menuID: 0,
+      menuID: -1,
       curExpense: 0,
       expenseEnough: false,
       business: {
@@ -36,6 +36,11 @@ const _sfc_main = {
     },
     menuChange(data) {
       this.menuID = data;
+      if (data != -1) {
+        this.getMenufood(this.menu[data].id);
+      } else {
+        this.getfood(this.business.id);
+      }
     },
     //点击菜品的加减号时，使对应菜品对象的num变化，并遍历菜品数组计算当前价格
     async add(index) {
@@ -121,6 +126,18 @@ const _sfc_main = {
         this.foods[i].num = 0;
       }
       console.log(res);
+    },
+    async getMenufood(menuId) {
+      const res = await this.$myRequest({
+        url: "/food/selectAll",
+        data: {
+          menuID: menuId
+        }
+      });
+      this.foods = res.data.data;
+      for (var i = 0; i < this.foods.length; i++) {
+        this.foods[i].num = 0;
+      }
     }
   },
   //接收外卖页传来的商家id，获取商家信息和菜单，渲染页面
@@ -147,7 +164,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.o(($event) => $options.tabChange("info")),
     i: $data.tab == "order"
   }, $data.tab == "order" ? common_vendor.e({
-    j: common_vendor.f($data.menu, (item, index, i0) => {
+    j: common_vendor.n($data.menuID == -1 ? "menu menu-selected" : "menu"),
+    k: common_vendor.o(($event) => $options.menuChange(-1)),
+    l: common_vendor.f($data.menu, (item, index, i0) => {
       return {
         a: common_vendor.t(item.type),
         b: item.id,
@@ -155,7 +174,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: common_vendor.o(($event) => $options.menuChange(index), item.id)
       };
     }),
-    k: common_vendor.f($data.foods, (item, index, i0) => {
+    m: common_vendor.f($data.foods, (item, index, i0) => {
       return {
         a: _ctx.$hostURL + item.image,
         b: common_vendor.t(item.name),
@@ -166,20 +185,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         g: item.id
       };
     }),
-    l: common_vendor.t($data.curExpense),
-    m: common_vendor.t($data.business.deliverExpense),
-    n: this.expenseEnough
+    n: common_vendor.t($data.curExpense),
+    o: common_vendor.t($data.business.deliverExpense),
+    p: this.expenseEnough
   }, this.expenseEnough ? {
-    o: common_vendor.o(($event) => $options.toSubmitOrder())
+    q: common_vendor.o(($event) => $options.toSubmitOrder())
   } : {
-    p: common_vendor.t($data.business.beginExpense)
+    r: common_vendor.t($data.business.beginExpense)
   }) : {}, {
-    q: $data.tab == "info"
+    s: $data.tab == "info"
   }, $data.tab == "info" ? {
-    r: common_vendor.t($data.business.address),
-    s: common_vendor.t($data.business.beginExpense),
-    t: common_vendor.t($data.business.deliverExpense),
-    v: common_vendor.t($data.business.tel)
+    t: common_vendor.t($data.business.address),
+    v: common_vendor.t($data.business.beginExpense),
+    w: common_vendor.t($data.business.deliverExpense),
+    x: common_vendor.t($data.business.tel)
   } : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-ec9204da"], ["__file", "D:/Product/Project/Software-Engineering-Group/uni-app/pages/business/business.vue"]]);

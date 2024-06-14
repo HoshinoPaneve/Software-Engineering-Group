@@ -139,8 +139,8 @@
 	border-top-left-radius: 20rpx;
 	border-top-right-radius: 20rpx;
 	font-size: 35rpx;
-	background-color: #393;
-	color: #ffc;
+	background-color: #39c;
+	color: #fff;
 }
 .res{
 	height: 200rpx;

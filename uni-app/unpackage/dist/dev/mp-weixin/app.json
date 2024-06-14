@@ -10,7 +10,8 @@
     "pages/register/register",
     "pages/me/me",
     "pages/wallet/wallet",
-    "pages/charge/charge"
+    "pages/charge/charge",
+    "pages/person/person"
   ],
   "usingComponents": {
     "my-login": "/wxcomponents/my-login/my-login"

@@ -1,10 +1,10 @@
 
-.title {
+.title.data-v-19c123a7 {
 	font-weight: bold;
 	font-size: 36rpx;
 	margin-bottom: 30rpx;
 }
-.cartegory-item {
+.cartegory-item.data-v-19c123a7 {
 	flex: 1; 
 	display: flex; 
 	justify-content: space-between; 
@@ -12,11 +12,11 @@
 	flex-direction: column; 
 	grid-gap: 10rpx;
 }
-.info-item {
+.info-item.data-v-19c123a7 {
 	padding: 15rpx; 
 	border-bottom: 2rpx solid #eee;
 }
-.info-item .uni-icons {
+.info-item .uni-icons.data-v-19c123a7 {
 	position: relative;
 	top: 2rpx;
 }

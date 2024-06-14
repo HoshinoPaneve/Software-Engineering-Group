@@ -4,7 +4,7 @@
 		
 		<view v-else>
 			
-			<view style="text-align: center;">
+			<view style="text-align: center;" class="userinfo">
 				<image :src="$hostURL+avatar" style="width: 200rpx; height: 200rpx; border-radius: 50%;"></image>
 				<view style="margin: 10rpx 0;">{{ name }}</view>
 			</view>
@@ -13,19 +13,19 @@
 				<view class="title">用户服务</view>
 				<view style="display: flex;">
 					<view class="cartegory-item" @click="goPage('/pages/address/address')">
-						<image src="../../static/uni.png" style="width: 50%;" mode="widthFix"></image>
+						<image src="../../static/icons/address_book.png" style="width: 50%;" mode="widthFix"></image>
 						<view style="flex: 1;">我的地址</view>
 					</view>
 					<view class="cartegory-item" @click="goPage('/pages/records/records')">
-						<image src="../../static/uni.png" style="width: 50%;" mode="widthFix"></image>
+						<image src="../../static/icons/refund.png" style="width: 50%;" mode="widthFix"></image>
 						<view style="flex: 1;">收支明细</view>
 					</view>
 					<view class="cartegory-item" @click="goPage('/pages/myComment/myComment')">
-						<image src="../../static/uni.png" style="width: 50%;" mode="widthFix"></image>
+						<image src="../../static/icons/comment.png" style="width: 50%;" mode="widthFix"></image>
 						<view style="flex: 1;">评价中心</view>
 					</view>
 					<view class="cartegory-item" @click="goPage('/pages/wallet/wallet')">
-						<image src="../../static/uni.png" style="width: 50%;" mode="widthFix"></image>
+						<image src="../../static/icons/pay.png" style="width: 50%;" mode="widthFix"></image>
 						<view style="flex: 1;">我的钱包</view>
 					</view>
 				</view>
@@ -94,7 +94,8 @@
 	}
 </script>
 
-<style>
+<style scoped>
+	
 .title {
 	font-weight: bold;
 	font-size: 36rpx;

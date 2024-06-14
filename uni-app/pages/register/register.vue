@@ -43,7 +43,7 @@ export default {
 	  	  
 	  	  // 跳转到首页或其他页面
 	  	  uni.switchTab({
-	  	    url: '/pages/my/my'
+	  	    url: '/pages/me/me'
 	  	  });
 	  	  uni.showToast({
 	  	    title: '注册成功',

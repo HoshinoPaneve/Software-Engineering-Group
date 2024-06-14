@@ -2,12 +2,12 @@
 	<view>
 		<view class="orderBlock">
 		  <view class="head">
-		    <view class="address" @click="toAddress()">
+		    <view class="address" @click="popup">
 		      <view class="map">
-		        <view class="iconfont icon-map2">{{address}}</view>
+		        <view class="iconfont icon-map2">{{address.address}}{{address.doorNo}}</view>
 		        <view class="name">
-		          <text>李四先生</text>
-		          <text class="phone">18316588222</text>
+		          <text>{{address.userName}}</text>
+		          <text class="phone">{{address.phone}}</text>
 		        </view>
 		      </view>
 		      <view class="iconfont icon-more"></view>
@@ -90,6 +90,21 @@
 		<view class="padding">
 		
 		</view>
+		
+		<uni-popup ref="popup" type="bottom">
+			<view class="address-container">
+				<view class="title">选择地址</view>
+				<view v-for="(item,index) in addresses" key="index" class="addressList">
+					<view  @click="changeAddress(index)">
+						<view class="position">{{item.address}}{{item.doorNo}}</view>
+						<view class="userinfo">{{item.userName}}{{item.phone}}</view>
+					</view>
+					
+					<view class="edit" @click="toEditAddress(index)">修改</view>
+				</view>
+				<view class="toAdd" @click="toAddAddress">去添加</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -120,6 +135,7 @@
 					saleVolume:300,
 					num:0
 				}],
+				addresses:[]
 			}
 		},
 		methods: {
@@ -130,7 +146,7 @@
 					data:{
 						userId:uni.getStorageSync('userId'),
 						businessId:this.business.id,
-						address:this.address,
+						address:this.address.address+this.address.doorNo,
 						notes:this.notes,
 						price:this.expense
 					}
@@ -149,11 +165,33 @@
 					})
 				})
 			},
-			toAddress(){
-				uni.navigateTo({
-					url:"/pages/address/address"
+			async selectAddress(){
+				const res=await this.$myRequest({
+					url:'/address/selectAll',
+					data:{
+						userId:uni.getStorageSync('userId'),
+					}
 				})
-			}
+				this.addresses=res.data.data
+			},
+			popup(){
+				this.$refs.popup.open('bottom')
+			},
+			toAddAddress(){
+				uni.navigateTo({
+					url:'/pages/addAddress/addAddress'
+				})
+			},
+			toEditAddress(index){
+				uni.navigateTo({
+					url:'/pages/addAddress/addAddress?id='+this.addresses[index].id
+				})
+			},
+			changeAddress(index){
+				this.address=this.addresses[index]
+				this.$refs.popup.close()
+			},
+			
 		},
 		
 		//接收商家页传过来的商家信息和商品信息，计算金额
@@ -166,6 +204,9 @@
 			this.foods=JSON.parse(decodeURIComponent(option.foods));
 			this.expense=parseFloat(option.expense)+this.business.deliverExpense+this.packExpense;
 			uni.hideLoading()
+		},
+		onShow() {
+			this.selectAddress()
 		}
 	}
 </script>
@@ -322,7 +363,8 @@
 }
 .submit {
   padding: 40rpx;
-  background: #ffe400;
+  background: #39c;
+  color: white;
 }
 .orderType {
   padding: 30rpx 40rpx;
@@ -333,5 +375,38 @@
 }
 .padding {  
   padding-bottom: 160rpx;
+}
+
+
+.address-container{
+	width: 100vw;
+	background: #fff;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.addressList{
+	display: flex;
+	justify-content: space-between;
+	padding: 20rpx;
+}
+.title{
+	text-align: center;
+	width: 100%;
+	padding: 40rpx 0;
+}
+.position{
+	font-size: 40rpx;
+}
+.userinfo{
+	color: #666;
+}
+.edit{
+	padding: 30rpx;
+}
+.toAdd{
+	text-align: center;
+	width: 100%;
+	padding: 30rpx 0;
+	font-size: 40rpx;
 }
 </style>

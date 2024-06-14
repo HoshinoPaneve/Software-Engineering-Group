@@ -1,5 +1,5 @@
 <template>
-	<view v-for="(order, index) in orderList" :key="index">
+	<view v-for="(order, index) in orderList" :key="index" class="container">
 	<view class="order-container">
 		<view class="order-banner"></view>
 			<view class="main">
@@ -154,6 +154,7 @@
 </script>
 
 <style scoped>
+	
 	.order-container{
 		margin: 0 20rpx;
 		background-color: #fff;

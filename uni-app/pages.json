@@ -75,6 +75,13 @@
 			{
 				"navigationBarTitleText" : "充值"
 			}
+		},
+		{
+			"path": "pages/person/person",
+			"style" :
+			{
+				"navigationBarTitleText" : "个人信息"
+			}
 		}
 	],
 	"globalStyle": {

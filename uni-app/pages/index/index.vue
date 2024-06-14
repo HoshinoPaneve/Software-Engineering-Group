@@ -1,16 +1,14 @@
 <template>
 	<view class="index-container">
-		<uni-search-bar @confirm="search" @input="input" bgColor="rgba(255,255,255,1)" placeholder="搜索" radius="50"/>
-		
+		<view class="top-banner">
+			<uni-search-bar @confirm="search" @input="input" bgColor="rgba(255,255,255,1)" placeholder="搜索" radius="50"/>
+			
+			
+		</view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular class="swiper">
-			<swiper-item>
+			<swiper-item v-for="item in swiper">
 				<view class="swiper-item">
-					<image src="/static/entry_swiper_CrazyThursday.jpg" class="swiper-img"/>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image src="/static/logo.png" class="swiper-img" />
+					<image :src="$hostURL+item.image" class="swiper-img"/>
 				</view>
 			</swiper-item>
 		</swiper>
@@ -34,10 +32,16 @@
 				<text>取快递</text>
 			</view>
 		</view>
-		<view class="recommand-text">
+		<view class="recommend-text">
 			<text>兴趣推荐</text>
 		</view>
-		<view class="recommand-list">
+		<view class="recommend-list">
+			<view class="recommend" v-for="item in recommendList" @click="toBusiness(item.busId)">
+				<image :src="$hostURL+ item.image" class="recommend-image"></image>
+				<view class="">
+					{{item.name}}
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -46,7 +50,13 @@
 	export default {
 		data() {
 			return {
-				swiper:[],
+				swiper:
+				[{image:'/images/swiper-img/swiper-1.png'},
+				{image:'/images/swiper-img/swiper-2.png'}],
+				recommendList:[
+					{name:'吮指原味鸡',image:'/images/goods-img/goods-1-1.png',busId:1},
+					{name:'新奥尔良烤翅',image:'/images/goods-img/goods-1-2.png',busId:1}
+				]
 			}
 		},
 		methods: {
@@ -56,35 +66,39 @@
 			input(){
 				console.log('input')
 			},
-				
-			//调用util/api.js中封装的链接方法，请求轮播图数据
-			async getSwiper(){
-				const res=await this.$myRequest({
-					url:'/music/select'
+			toBusiness(id){
+				uni.navigateTo({
+					url:'/pages/business/business?busId='+id
 				})
-				console.log(res);
-				this.swiper=res;
 			}
+				
 		},
 		onLoad() {
-			this.getSwiper()
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	
+	.top-banner{
+		padding-top: 80rpx;
+		margin: 0 20rpx;
+		background-color: #39c;
+		border-bottom-left-radius: 30rpx;
+		border-bottom-right-radius: 30rpx;
+		height: 450rpx;
+	}
 	
 	.index-container {
-		padding-top: 80rpx;
 		font-size: 14px;
 		line-height: 24px;
 	}
 	.swiper{
 		border-radius: 20rpx;
 		overflow: hidden;
-		margin: 20rpx;
-		height: 400rpx;
+		margin: 20rpx 50rpx;
+		margin-top: -300rpx;
+		height: 350rpx;
 		.swiper-img{
 			width: 100%;
 		}
@@ -114,10 +128,34 @@
 		height: 100rpx;
 	}
 	
-	.recommand-text{
+	.recommend-text{
 		margin-top: 30rpx;
 		margin-left: 30rpx;
+		margin-bottom: 30rpx;
 		font-size: 35rpx;
 	}
 	
+	.recommend-list{
+		margin: 0 30rpx;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.recommend{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		width: 40vw;
+		background-color: #39c;
+		padding: 10rpx;
+		border-radius: 20rpx;
+		color: white;
+	}
+	
+	.recommend-image{
+		width: 100%;
+		height: 250rpx;
+		border-radius: 20rpx;
+	}
 </style>

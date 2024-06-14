@@ -30,8 +30,8 @@
 	border-top-left-radius: 20rpx;
 	border-top-right-radius: 20rpx;
 	font-size: 35rpx;
-	background-color: #393;
-	color: #ffc;
+	background-color: #39c;
+	color: #fff;
 }
 .res.data-v-24088b51{
 	height: 200rpx;

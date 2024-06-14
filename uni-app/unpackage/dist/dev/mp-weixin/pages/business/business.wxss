@@ -2,7 +2,7 @@
 .banner.data-v-ec9204da{
 		width: 100%;
 		height: 150rpx;
-		background-color: aquamarine;
+		background-color: #39c;
 }
 .main.data-v-ec9204da{
 		margin-top: -20rpx;
@@ -51,7 +51,7 @@
 		text-align: center;
 }
 .tab-active.data-v-ec9204da{
-		border-bottom: 4rpx solid #ffe400;
+		border-bottom: 4rpx solid #39c;
 }
 .order-menubar.data-v-ec9204da{
 		float: left;
@@ -62,7 +62,8 @@
 }
 .order-foodbar.data-v-ec9204da{
 		float: left;
-		height: 1080rpx;
+		height: 950rpx;
+		padding-bottom: 130rpx;
 		width: 75%;
 }
 .menu.data-v-ec9204da{
@@ -73,7 +74,7 @@
 }
 .menu-selected.data-v-ec9204da{
 		background-color: #fff;
-		border-left: 8rpx solid #ffe400;
+		border-left: 8rpx solid #39c;
 }
 .food-info.data-v-ec9204da{
 		display: flex;
@@ -113,7 +114,7 @@
 }
 .addOrReduce > .iconfont.data-v-ec9204da {
 	  font-size: 40rpx;
-	  color: #ffe400;
+	  color: #39c;
 	  padding:15rpx;
 }
 .info_top.data-v-ec9204da {

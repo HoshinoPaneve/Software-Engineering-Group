@@ -27,6 +27,9 @@
 				</view>
 				<view class="order" v-if="tab=='order'">
 					<scroll-view scroll-y="true" class="order-menubar">
+						<view :class="menuID==-1?'menu menu-selected' :'menu'" @click="menuChange(-1)">
+							全部
+						</view>
 						<view v-for="(item,index) in menu" :key="item.id" :class="index==menuID?'menu menu-selected' :'menu'" @click="menuChange(index)">
 							{{item.type}}
 						</view>
@@ -93,7 +96,7 @@
 		data() {
 			return {
 				tab:'order',
-				menuID:0,
+				menuID:-1,
 				curExpense:0,
 				expenseEnough:false,
 				business:{
@@ -125,6 +128,13 @@
 			},
 			menuChange(data){
 				this.menuID=data;
+				if(data!=-1){
+					this.getMenufood(this.menu[data].id)
+				}
+				else{
+					this.getfood(this.business.id)
+				}
+				
 			},
 			//点击菜品的加减号时，使对应菜品对象的num变化，并遍历菜品数组计算当前价格
 			async add(index){
@@ -215,6 +225,18 @@
 				}
 				
 				console.log(res);
+			},
+			async getMenufood(menuId){
+				const res=await this.$myRequest({
+					url:'/food/selectAll',
+					data:{
+						menuID:menuId
+					}
+				})
+				this.foods=res.data.data;
+				for(var i=0;i<this.foods.length;i++){
+					this.foods[i].num=0;
+				}
 			}
 		},
 		//接收外卖页传来的商家id，获取商家信息和菜单，渲染页面
@@ -237,7 +259,7 @@
 	.banner{
 		width: 100%;
 		height: 150rpx;
-		background-color: aquamarine;
+		background-color: #39c;
 	}
 	.main{
 		margin-top: -20rpx;
@@ -286,7 +308,7 @@
 		text-align: center;
 	}
 	.tab-active{
-		border-bottom: 4rpx solid #ffe400;
+		border-bottom: 4rpx solid #39c;
 	}
 	
 	.order-menubar{
@@ -298,7 +320,8 @@
 	}
 	.order-foodbar{
 		float: left;
-		height: 1080rpx;
+		height: 950rpx;
+		padding-bottom: 130rpx;
 		width: 75%;
 	}
 	.menu{
@@ -309,7 +332,7 @@
 	}
 	.menu-selected{
 		background-color: #fff;
-		border-left: 8rpx solid #ffe400;
+		border-left: 8rpx solid #39c;
 	}
 	
 	.food-info{
@@ -350,7 +373,7 @@
 	}
 	.addOrReduce > .iconfont {
 	  font-size: 40rpx;
-	  color: #ffe400;
+	  color: #39c;
 	  padding:15rpx;
 	}
 	

@@ -25,7 +25,8 @@ const _sfc_main = {
         image: "/images/good-img/good-1-1.png",
         saleVolume: 300,
         num: 0
-      }]
+      }],
+      addresses: []
     };
   },
   methods: {
@@ -36,7 +37,7 @@ const _sfc_main = {
         data: {
           userId: common_vendor.index.getStorageSync("userId"),
           businessId: this.business.id,
-          address: this.address,
+          address: this.address.address + this.address.doorNo,
           notes: this.notes,
           price: this.expense
         }
@@ -55,10 +56,31 @@ const _sfc_main = {
         });
       });
     },
-    toAddress() {
-      common_vendor.index.navigateTo({
-        url: "/pages/address/address"
+    async selectAddress() {
+      const res = await this.$myRequest({
+        url: "/address/selectAll",
+        data: {
+          userId: common_vendor.index.getStorageSync("userId")
+        }
       });
+      this.addresses = res.data.data;
+    },
+    popup() {
+      this.$refs.popup.open("bottom");
+    },
+    toAddAddress() {
+      common_vendor.index.navigateTo({
+        url: "/pages/addAddress/addAddress"
+      });
+    },
+    toEditAddress(index) {
+      common_vendor.index.navigateTo({
+        url: "/pages/addAddress/addAddress?id=" + this.addresses[index].id
+      });
+    },
+    changeAddress(index) {
+      this.address = this.addresses[index];
+      this.$refs.popup.close();
     }
   },
   //接收商家页传过来的商家信息和商品信息，计算金额
@@ -71,16 +93,30 @@ const _sfc_main = {
     this.foods = JSON.parse(decodeURIComponent(option.foods));
     this.expense = parseFloat(option.expense) + this.business.deliverExpense + this.packExpense;
     common_vendor.index.hideLoading();
+  },
+  onShow() {
+    this.selectAddress();
   }
 };
+if (!Array) {
+  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
+  _easycom_uni_popup2();
+}
+const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
+if (!Math) {
+  _easycom_uni_popup();
+}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.t($data.address),
-    b: common_vendor.o(($event) => $options.toAddress()),
-    c: _ctx.$hostURL + this.business.image,
-    d: common_vendor.t($data.business.name),
-    e: common_vendor.o(($event) => _ctx.calling()),
-    f: common_vendor.f($data.foods, (item, k0, i0) => {
+    a: common_vendor.t($data.address.address),
+    b: common_vendor.t($data.address.doorNo),
+    c: common_vendor.t($data.address.userName),
+    d: common_vendor.t($data.address.phone),
+    e: common_vendor.o((...args) => $options.popup && $options.popup(...args)),
+    f: _ctx.$hostURL + this.business.image,
+    g: common_vendor.t($data.business.name),
+    h: common_vendor.o(($event) => _ctx.calling()),
+    i: common_vendor.f($data.foods, (item, k0, i0) => {
       return {
         a: _ctx.$hostURL + item.image,
         b: common_vendor.t(item.name),
@@ -88,13 +124,28 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: common_vendor.t(item.num)
       };
     }),
-    g: common_vendor.t($data.packExpense),
-    h: common_vendor.t($data.business.deliverExpense),
-    i: common_vendor.t($data.expense),
-    j: $data.notes,
-    k: common_vendor.o(($event) => $data.notes = $event.detail.value),
-    l: common_vendor.t(this.expense),
-    m: common_vendor.o(($event) => $options.submitOrder())
+    j: common_vendor.t($data.packExpense),
+    k: common_vendor.t($data.business.deliverExpense),
+    l: common_vendor.t($data.expense),
+    m: $data.notes,
+    n: common_vendor.o(($event) => $data.notes = $event.detail.value),
+    o: common_vendor.t(this.expense),
+    p: common_vendor.o(($event) => $options.submitOrder()),
+    q: common_vendor.f($data.addresses, (item, index, i0) => {
+      return {
+        a: common_vendor.t(item.address),
+        b: common_vendor.t(item.doorNo),
+        c: common_vendor.t(item.userName),
+        d: common_vendor.t(item.phone),
+        e: common_vendor.o(($event) => $options.changeAddress(index)),
+        f: common_vendor.o(($event) => $options.toEditAddress(index))
+      };
+    }),
+    r: common_vendor.o((...args) => $options.toAddAddress && $options.toAddAddress(...args)),
+    s: common_vendor.sr("popup", "0d2051e8-0"),
+    t: common_vendor.p({
+      type: "bottom"
+    })
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-0d2051e8"], ["__file", "D:/Product/Project/Software-Engineering-Group/uni-app/pages/submitOrder/submitOrder.vue"]]);

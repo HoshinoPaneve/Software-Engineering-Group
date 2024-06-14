@@ -14,6 +14,7 @@ if (!Math) {
   "./pages/me/me.js";
   "./pages/wallet/wallet.js";
   "./pages/charge/charge.js";
+  "./pages/person/person.js";
 }
 const _sfc_main = {
   onLaunch: function() {

@@ -146,7 +146,8 @@
 }
 .submit.data-v-0d2051e8 {
   padding: 40rpx;
-  background: #ffe400;
+  background: #39c;
+  color: white;
 }
 .orderType.data-v-0d2051e8 {
   padding: 30rpx 40rpx;
@@ -157,4 +158,35 @@
 }
 .padding.data-v-0d2051e8 {  
   padding-bottom: 160rpx;
+}
+.address-container.data-v-0d2051e8{
+	width: 100vw;
+	background: #fff;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.addressList.data-v-0d2051e8{
+	display: flex;
+	justify-content: space-between;
+	padding: 20rpx;
+}
+.title.data-v-0d2051e8{
+	text-align: center;
+	width: 100%;
+	padding: 40rpx 0;
+}
+.position.data-v-0d2051e8{
+	font-size: 40rpx;
+}
+.userinfo.data-v-0d2051e8{
+	color: #666;
+}
+.edit.data-v-0d2051e8{
+	padding: 30rpx;
+}
+.toAdd.data-v-0d2051e8{
+	text-align: center;
+	width: 100%;
+	padding: 30rpx 0;
+	font-size: 40rpx;
 }
