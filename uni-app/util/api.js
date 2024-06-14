@@ -22,6 +22,7 @@ export const myRequest = (options)=>{
 					})
 				}
 				if(res.data.code==401){
+					uni.clearStorage()
 					uni.switchTab({
 						url:'/pages/me/me'
 					})

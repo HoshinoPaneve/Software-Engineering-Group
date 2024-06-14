@@ -19,6 +19,7 @@ const myRequest = (options) => {
           });
         }
         if (res.data.code == 401) {
+          common_vendor.index.clearStorage();
           common_vendor.index.switchTab({
             url: "/pages/me/me"
           });

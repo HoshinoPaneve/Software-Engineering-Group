@@ -70,17 +70,11 @@
             <if test="businessId != null">
                 bussiness_id = #{businessId},
             </if>
-            <if test="time != null">
-                time = #{time},
-            </if>
-            <if test="acceptTime != null">
-                accept_time = #{acceptTime},
-            </if>
             <if test="status != null">
                 status = #{status},
             </if>
-            <if test="comment != null">
-                comment = #{comment},
+            <if test="notes != null">
+                notes = #{notes},
             </if>
             <if test="price != null">
                 price = #{price},

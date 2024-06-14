@@ -5,7 +5,7 @@ const _sfc_main = {
     return {
       packExpense: 1,
       expense: 11,
-      address: "启梦创业广场 1A158-159",
+      address: {},
       notes: "",
       business: {
         id: 1,
@@ -31,6 +31,13 @@ const _sfc_main = {
   },
   methods: {
     async submitOrder() {
+      if (Object.keys(this.address).length === 0) {
+        common_vendor.index.showToast({
+          title: "请填写地址",
+          icon: "none"
+        });
+        return;
+      }
       await this.$myRequest({
         url: "/orders/addOrder",
         method: "POST",
