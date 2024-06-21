@@ -1,6 +1,7 @@
 <template>
   <view class="container">
     <view class="login-box">
+      <h2>用户登录</h2>
       <input class="input" type="text" placeholder="请输入账号" v-model="username" />
       <input class="input" type="password" placeholder="请输入密码" v-model="password" />
       <button class="btn" @click = "login">登录</button>
@@ -89,12 +90,18 @@
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 		border-radius: 10px;
 	}
+	
+	.login-box h2 {
+		margin-bottom: 10%;
+		text-align: center;
+		color: blueviolet;
+	}
 
 	.input {
 		width: 100%;
 		padding: 10px;
 		margin-bottom: 15px;
-		margin-right: 20px;
+		margin-right: 30px;
 		border: 1px solid #ddd;
 		border-radius: 5px;
 	}
@@ -102,7 +109,7 @@
     .btn {
 		width: 100%;
 		padding: 10px;
-		background-color: #007aff;
+		background-color: coral;
 		color: #fff;
 		border: none;
 		border-radius: 25px;
@@ -113,8 +120,8 @@
 		width: 60%;
 		background-color: aqua;
 		height: 40px;
+		margin-top: 5%;
 		color: gray;
-		border: none;
 		border-radius: 15px;
 		text-align: center;
 	}
