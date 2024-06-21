@@ -1,6 +1,7 @@
 <template>
   <view class="container">
     <view class="login-box">
+      <h2>用户注册</h2>
       <input class="input" type="text" placeholder="请输入账号" 
 	  v-model="username" />
       <input class="input" type="password" placeholder="请输入密码" 
@@ -79,6 +80,12 @@ export default {
 		border-radius: 10px;
 	}
 
+	.login-box h2 {
+		text-align: center;
+		color: cornflowerblue;
+		margin-bottom: 10%;
+	}
+
 	.input {
 		width: 100%;
 		padding: 10px;
@@ -93,18 +100,7 @@ export default {
 		padding: 10px;
 		background-color: #007aff;
 		color: #fff;
-		border: none;
 		border-radius: 25px;
-		text-align: center;
-	}
-	
-	.register_btn {
-		width: 60%;
-		background-color: aqua;
-		height: 40px;
-		color: gray;
-		border: none;
-		border-radius: 15px;
 		text-align: center;
 	}
 </style>
